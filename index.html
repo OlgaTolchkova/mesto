@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Проектная работа 3 Ольги Толчковой на Яндекс.Практикуме">
+    <meta name="keywords" content="Mesto Russia">
+    <meta name="author" content="Ольга Толчкова">
+    <link rel="stylesheet" href="./pages/index.css">
+    <script src="scripts/index.js"></script>
+    <title>Mesto</title>
+</head>
+
+<body class="page">
+    <header class="header">
+        <img class="header__logo" src="./images/header-logo.svg" alt="Логотип сайта 'Mesto Russia'">
+    </header>
+
+    <main class="content">
+        <section class="profile">
+            <img class="profile__avatar" src="./images/kusto.jpg"
+                alt="портрет улыбающегося мужчины в красной шапке и рубашке">
+            <div class="profile__info">
+                <div class="profile__wrapper">
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <button class="profile__edit-button" type="button" aria-label="Кнопка редактирования профиля">
+                </button>
+                </div>
+                <p class="profile__interest">Исследователь океана</p>
+            </div>
+            <button class="profile__add-button" type="button" aria-label="Кнопка для добавления фото">
+            </button>
+
+        </section>
+
+        <section class="elements">
+            <ul class="elements-grid">
+                <li class="element__item">
+                    <img class="element__image" src="./images/karachaevsk.jpg"
+                        alt="Старинная православная церковь среди гор">
+                    <div class="element__under">
+                        <caption class="element__caption">Карачаевск</caption>
+                        <img class="element__under-image" src="./images/heart.svg" alt="Сердце-Like">
+                    </div>
+                </li>
+                <li class="element__item">
+                    <img class="element__image" src="./images/elbrus.jpg"
+                        alt="Предгорье, а на заднем фоне две вершины Эльбруса">
+                        <div class="element__under">
+                            <caption class="element__caption">Гора Эльбрус</caption>
+                            <img class="element__under-image" src="./images/heart.svg" alt="Сердце-Like">
+                        </div>
+                </li>
+                <li class="element__item">
+                    <img class="element__image" src="./images/dombai.jpg"
+                        alt="На переднем плане сосновый лес, на фоне величественные снежники Домбая">
+                        <div class="element__under">
+                            <caption class="element__caption">Домбай</caption>
+                            <img class="element__under-image" src="./images/heart.svg" alt="Сердце-Like">
+                        </div>
+                </li>
+                <li class="element__item">
+                    <img class="element__image" src="./images/elbrus.jpg"
+                        alt="Предгорье, а на заднем фоне две вершины Эльбруса">
+                        <div class="element__under">
+                            <caption class="element__caption">Гора Эльбрус</caption>
+                            <img class="element__under-image" src="./images/heart.svg" alt="Сердце-Like">
+                        </div>
+                </li>
+                <li class="element__item">
+                    <img class="element__image" src="./images/dombai.jpg"
+                        alt="На переднем плане сосновый лес, на фоне величественные снежники Домбая">
+                        <div class="element__under">
+                            <caption class="element__caption">Домбай</caption>
+                            <img class="element__under-image" src="./images/heart.svg" alt="Сердце-Like">
+                        </div>
+                </li>
+                <li class="element__item">
+                    <img class="element__image" src="./images/karachaevsk.jpg"
+                        alt="Старинная православная церковь среди гор">
+                        <div class="element__under">
+                            <caption class="element__caption">Карачаево-Черкессия</caption>
+                            <img class="element__under-image" src="./images/heart.svg" alt="Сердце-Like">
+                        </div>
+                </li>
+                </ul>
+                </section>
+
+            </main>
+
+            <footer class="footer">
+                <p class="footer__copyright">&copy; 2020,Mesto Russia</p>
+            </footer>
+
+
+            <section class="popup hidden">
+                <div class="popup__window">
+                    <h2 class="popup__title">Редактировать профиль</h2>
+                    <form class="popup__form">
+                        <input class="popup__name" type="text" name="name" value="Жак-Ив Кусто" required>
+                        <input class="popup__interest" type="text" name="interest" value="Исследователь океана" required>
+                    <button class="popup__save-button" type="submit">Сохранить</button>  <!--Сохранение формы-->
+                    </form>
+                    <button class="popup__close-button" type="button"></button> <!--Закрытие формы-->
+                </div>
+            </section>
+
+
+        </body>
+        
+        </html>
