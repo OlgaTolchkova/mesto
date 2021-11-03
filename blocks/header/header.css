@@ -7,8 +7,29 @@
     align-items: flex-start;
 } 
 
+@media screen and (max-width: 560px) {
+    .header {
+        max-width: 320px;
+        margin: 0;  
+    }
+}
+
 .header__logo {
     max-width: 142px;
     margin: 45px auto 41px 0;
     padding: 0 auto auto 0;
+}
+
+@media screen and (max-width: 560px) {
+    .header__logo {
+        max-width: 103.74px;
+        margin: 28px auto 31px 27px;  
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .header__logo {
+        max-width: 103.74px;
+        margin: 28px auto 31px 27px;  
+    }
 }

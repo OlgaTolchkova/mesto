@@ -1,48 +1,42 @@
 const popupElement=document.querySelector('.popup');
-const closeButton=popupElement.querySelector('.popup__close-button');
+const closePopup=document.querySelector('.popup__close-button');
+const openPopup=document.querySelector('.profile__edit-button');
+const addButton=document.querySelector('.popup__add-button');
+const saveButton=document.querySelector('.popup__save-button');
+const profileName=document.querySelector('.profile__title');
+const profileInterest=document.querySelector('.profile__interest');
+const popupProfileInputs = popupProfile.querySelectorAll('.popup__input');
 
-function openPopup() {
-    popupElement.classList.remove('hidden');
+function noViewPopup() {
+    popupElement.classList.remove('popup_opened');
 }
 
-function closePopup() {
-    popupElement.classList.add('hidden');
+function viewPopup() {
+    popupElement.classList.add('popup_opened');
 }
 
-navButton.addEventListener('click', openPopup)
+// Находим форму в DOM
+let formElement = document.querySelector('.popup__input');
+let nameInput = document.querySelector('.popup__input_name.css');
+let interestInput = document.querySelector('.popup__input_interes.css');
 
-closeButton.addEventListener('click', closePopup)
+// Обработчик отправки форм
+function formSabmitHandler (evt) {
+    evt.preventDefault();
+    profileInterest.textContent = interestInput.value;
+    profileName.textContent = nametInput.value;
+}
 
-
-
-
-
-
-
-export default class Popup {
-    constructor(popupSelector) {
-      this._popupSelector = popupSelector;
-      this._popupElement = document.querySelector(this._popupSelector);
-      this._popupCloseButton = this._popupElement.querySelector('.popup__close');
-      this._handleEscClose = this._handleEscClose.bind(this);
-    }
-  
-    open() {
-      this._popupElement.classList.add('popup_opened');
-      document.addEventListener('keydown', this._handleEscClose);
-    }
-  
-    close() {
-      this._popupElement.classList.remove('popup_opened');
-      document.removeEventListener('keydown', this._handleEscClose);
-    }
-  
-
+// Прикрепляем обработчик к отправке форм
+saveButton.addEventListener('submit', formSabmitHandler);
+openPopup.addEventListener('click', viewPopup );
+closePopup.addEventListener('click', noViewPopup);
 
   
-    setEventListeners() {
-      this._popupCloseButton.addEventListener('click', () => this.close());
-  
-      this._popupElement.addEventListener("mousedown", (evt) => this._handlePopupClick(evt));
-    }
+  // функция заполнения полей формы данными из профиля
+  function handleTextInput() {
+    const userData = userInfo.getUserInfo();
+    popupProfileInputs.forEach(input => {
+      input.value = userData[input.name];
+    });
   }
