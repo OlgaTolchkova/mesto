@@ -1,0 +1,9 @@
+.element__item {
+    max-width: 100%;
+    width: 100%;
+    border-radius: 10px;
+    background: #FFFFFF;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}

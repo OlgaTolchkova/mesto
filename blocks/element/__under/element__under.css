@@ -1,0 +1,8 @@
+.element__under {
+    margin: 25px 15px 31px 21px;
+    padding: 0;
+    flex-wrap: nowrap;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
