@@ -27,12 +27,20 @@ function openClick() {
     formSubmitHandler(evt);
 }
 
-
 // закрытие попапа
 function closeClick() {
     popupElement.classList.remove('popup_opened');
 }
 
+// сохранение
+function saveClick() {
+    evt.preventDefault();
+    profileName.textContent = nameInput.value;
+    profileInterest.textContent = interestInput.value;
+    closeClick();
+}
+
 openPopup.addEventListener('click', openClick);
 popupElement.addEventListener('submit', formSubmitHandler);
 closePopup.addEventListener('click', closeClick);
+saveButton.addEventListener('click', saveClick);
