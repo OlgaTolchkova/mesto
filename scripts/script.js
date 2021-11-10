@@ -14,8 +14,8 @@ let interestInput = document.querySelector('.popup__input_interest');
 
 function formSubmitHandler(evt) {
     evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileInterest.textContent = interestInput.value;
+    nameInput.value = profileName.textContent;
+    interestInput.value = profileInterest.textContent;
     closeClick();
 }
 
@@ -24,7 +24,7 @@ function formSubmitHandler(evt) {
 function openClick() {
     popupElement.classList.add('popup_opened');
 
-    formSubmitHandler();
+    formSubmitHandler(evt);
 }
 
 
@@ -36,4 +36,3 @@ function closeClick() {
 openPopup.addEventListener('click', openClick);
 popupElement.addEventListener('submit', formSubmitHandler);
 closePopup.addEventListener('click', closeClick);
-saveButton.addEventListener('click', saveInput);

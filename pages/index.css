@@ -5,10 +5,10 @@
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/elements-grid/elements-grid.css);
 @import url(../blocks/element/__caption/element__caption.css);
-@import url(../blocks/element/__/element__caption.css);
 @import url(../blocks/element/__image/element__image.css);
 @import url(../blocks/element/__item/element__item.css);
 @import url(../blocks/element/__under/element__under.css);
+@import url(../blocks/element/__like/element__like.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/__container/popup__container.css);
