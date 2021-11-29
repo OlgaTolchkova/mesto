@@ -68,7 +68,7 @@ function closeEditPopup() {
 }
 
 // сохранение профиля
-function handleEditPopup(evt) {
+function handleEditFormSubmit(evt) {
     evt.preventDefault();
     profileNameElement.textContent = nameInput.value;
     profileInterestElement.textContent = interestInput.value;
@@ -105,6 +105,7 @@ const createDomNode = (item) => {
     const image = taskTemplate.querySelector('.element__image');
     nameOpen.textContent = item.name;
     image.src = item.link;
+    image.alt = item.name;
 
     //реализуем кнопку лайк
     const likeBtn = taskTemplate.querySelector('.element__like');
@@ -132,23 +133,23 @@ const result = initialCards.map((item) => {
     return createDomNode(item);
 });
 
-const handleCardForm = (evt) => {
+const handleCardFormSubmit = (evt) => {
     evt.preventDefault();
     const inputValueLink = linkInput.value;
     const inputValuePlace = placeInput.value;
     const taskName = createDomNode({ name: inputValuePlace, link: inputValueLink });
 
     elementList.prepend(taskName);
-    clearCardPopup();
     closeAddPopup();
+    clearCardPopup();
 }
 
 elementList.append(...result);
 
-addPopupForm.addEventListener('submit', handleCardForm);
+addPopupForm.addEventListener('submit', handleCardFormSubmit);
 openEditPopupButton.addEventListener('click', openEditPopup);
 closePopupButton.addEventListener('click', closeEditPopup);
-editPopupForm.addEventListener('submit', handleEditPopup);
+editPopupForm.addEventListener('submit', handleEditFormSubmit);
 openAddPopupButton.addEventListener('click', openAddPopup);
 closeAddPopupButton.addEventListener('click', closeAddPopup);
 closeImagePopupButton.addEventListener('click', closeImagePopup);
