@@ -11,7 +11,7 @@ const validationObject = {
 };
 
 //добавление слушателей для каждого поля ввода
-const setEventListeners = () => {
+const setEventListeners = (formElement) => {
     const formElement = document.querySelector('.popup__form');
     formElement.addEventListener('submit', evt => evt.preventDefault());
     const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
@@ -40,7 +40,7 @@ const isValid = (formElement, inputElement) => {
 const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove('popup__input_type_error');
-    errorElement.classList.remove('popup__input-error');
+    errorElement.classList.remove('popup__input-error_active');
     errorElement.textContent = '';
 };
 
@@ -49,7 +49,7 @@ const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add('popup__input_type_error');
     errorElement.textContent = errorMessage;
-    errorElement.classList.add('popup__input-error');
+    errorElement.classList.add('popup__input-error_active');
 };
 
 //Фунукия принимает массив полей ввода и эл-т кнопки,состояние которой нужно поменять
