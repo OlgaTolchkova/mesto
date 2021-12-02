@@ -18,6 +18,8 @@ const elementList = document.querySelector('.elements-grid');
 const meaningImg = document.querySelector('.popup__image');
 const meaningName = document.querySelector('.popup__image-title');
 const imageOpenPopup = document.querySelector('.popup_type_image');
+const popups = document.querySelectorAll('.popup');
+
 
 const initialCards = [{
         name: 'Архыз',
@@ -45,14 +47,25 @@ const initialCards = [{
     }
 ];
 
-// открытие попапов
-function openPopup(popup) {
-    popup.classList.add('popup_opened');
+// закрытие попапа с помощью Esc
+function closePopupEsc(evt) {
+    const popupOpened = document.querySelector('.popup_opened');
+    if (evt.key === 'Escape') {
+        closePopup(popupOpened);
+    }
 }
 
 //закрытие попапов
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closePopupEsc);
+}
+
+
+// открытие попапов
+function openPopup(popup) {
+    document.addEventListener('keydown', closePopupEsc);
+    popup.classList.add('popup_opened');
 }
 
 // открытие профиля
@@ -145,6 +158,16 @@ const handleCardFormSubmit = (evt) => {
 }
 
 elementList.append(...result);
+
+
+
+popups.forEach((popup) => {
+    popup.addEventListener('click', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup);
+        }
+    })
+})
 
 addPopupForm.addEventListener('submit', handleCardFormSubmit);
 openEditPopupButton.addEventListener('click', openEditPopup);
