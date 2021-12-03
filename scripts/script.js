@@ -19,6 +19,8 @@ const meaningImg = document.querySelector('.popup__image');
 const meaningName = document.querySelector('.popup__image-title');
 const imageOpenPopup = document.querySelector('.popup_type_image');
 const popups = document.querySelectorAll('.popup');
+const form = document.querySelector('.popup__form_type_second');
+const addButton = document.querySelector('.popup__save-button_add');
 
 // закрытие попапа с помощью Esc
 function closePopupEsc(evt) {
@@ -121,6 +123,16 @@ const result = initialCards.map((item) => {
     return createDomNode(item);
 });
 
+function setSubmitButtonState(isFormValid) {
+    if (isFormValid) {
+        addButton.removeAttribute('disabled');
+        addButton.classList.remove('popup__button_inactive');
+    } else {
+        addButton.setAttribute('disabled', true);
+        addButton.classList.add('popup__button_inactive');
+    }
+}
+
 const handleCardFormSubmit = (evt) => {
     evt.preventDefault();
     const inputValueLink = linkInput.value;
@@ -130,11 +142,15 @@ const handleCardFormSubmit = (evt) => {
     elementList.prepend(taskName);
     closeAddPopup();
     clearCardPopup();
+    setSubmitButtonState(false);
 }
 
 elementList.append(...result);
 
-
+form.addEventListener('input', function(evt) {
+    const isValid = linkInput.value.length > 0 && placeInput.value.length > 0
+    setSubmitButtonState(isValid);
+});
 
 popups.forEach((popup) => {
     popup.addEventListener('click', (evt) => {
