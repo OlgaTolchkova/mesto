@@ -48,7 +48,7 @@
     <section class="popup popup_type_edit">
         <div class="popup__container">
             <label class="popup__title">Редактировать профиль</label>
-            <form class="popup__form" name="popup-form" novalidate>
+            <form class="popup__form" name="popup-form-profile" novalidate>
                 <input id="name-input" class="popup__input popup__input_type_name" type="text" name="name" placeholder="Имя" required minlength="2" maxlength="40">
                 <span class="popup__input-error" id="name-input-error"></span>
                 <input id="interest" class="popup__input popup__input_type_interest" type="text" name="interest" placeholder="О себе" required minlength="2" maxlength="200">
@@ -64,7 +64,7 @@
     <section class="popup popup_type_add-card">
         <div class="popup__container">
             <label class="popup__title">Новое место</label>
-            <form class="popup__form popup__form_type_second" name="popup-form" novalidate>
+            <form class="popup__form popup__form_type_second" name="popup-form-mesto" novalidate>
                 <input id="name" class="popup__input popup__input_add-card_name" type="text" name="name" placeholder="Название" required minlength="2" maxlength="30">
                 <span class="popup__input-error" id="name-error"></span>
                 <input id="link" class="popup__input popup__input_add-card_link" type="url" name="link" placeholder="Ссылка на изображение" required>
@@ -91,15 +91,19 @@
     </template>
 
     <section class="popup popup_type_image">
-        <div class="popup__container popup__container-image">
-            <img class="popup__image" src="#" alt="#">
-            <figcaption class="popup__image-title"></figcaption>
+        <div class="popup__container-image">
+            <figure class="popup__figure">
+                <img class="popup__image" src="#" alt="#">
+                <figcaption class="popup__image-title"></figcaption>
+            </figure>
             <button class="popup__close-button" type="button" aria-label="Кнопка закрытия окна"></button>
         </div>
     </section>
 
+    <script src="./scripts/initialCards.js"></script>
     <script src="./scripts/script.js"></script>
     <script src="./scripts/validate.js"></script>
+
 </body>
 
 </html>

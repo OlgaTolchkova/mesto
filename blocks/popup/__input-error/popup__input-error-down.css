@@ -1,7 +1,7 @@
-.popup__input-error {
+.popup__input-error-down {
     display: none;
     position: absolute;
-    top: 62px;
+    top: 165px;
     left: 0px;
     max-width: 228px;
     margin: 0;
@@ -11,8 +11,4 @@
     font-size: 12px;
     line-height: 15px;
     color: #FF0000;
-}
-
-.popup__input-error:last-of-type {
-    top: 133px;
 }
