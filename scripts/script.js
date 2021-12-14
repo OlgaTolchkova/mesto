@@ -1,3 +1,9 @@
+import { FormValidator } from '../scripts/FormValidator.js';
+
+import { Card } from '../scripts/Card.js';
+
+import { initialCards } from '../scripts/initialCards.js';
+
 const editPopupElement = document.querySelector('.popup_type_edit');
 const addPopupButton = document.querySelector('.popup_type_add-card');
 const closePopupButton = document.querySelector('.popup_type_edit .popup__close-button');
@@ -21,6 +27,17 @@ const imageOpenPopup = document.querySelector('.popup_type_image');
 const popups = document.querySelectorAll('.popup');
 const form = document.querySelector('.popup__form_type_second');
 const addButton = document.querySelector('.popup__save-button_add');
+
+//объекты настроек всеx нужныx функциям классов и селекторов элементов
+const validationConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__button_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_active',
+};
+
 
 // закрытие попапа с помощью Esc
 function closePopupEsc(evt) {
@@ -133,6 +150,7 @@ function setSubmitButtonState(isFormValid) {
     }
 }
 
+// добавление карточки на стр.
 const handleCardFormSubmit = (evt) => {
     evt.preventDefault();
     const inputValueLink = linkInput.value;
@@ -150,6 +168,7 @@ elementList.append(...result);
 form.addEventListener('input', function(evt) {
     const isValid = linkInput.value.length > 0 && placeInput.value.length > 0
     setSubmitButtonState(isValid);
+
 });
 
 popups.forEach((popup) => {
