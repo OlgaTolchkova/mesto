@@ -19,14 +19,12 @@ const closeImagePopupButton = document.querySelector('.popup_type_image .popup__
 const addPopupForm = document.querySelector('.popup_type_add-card .popup__form');
 const placeInput = document.querySelector('.popup__input_add-card_name');
 const linkInput = document.querySelector('.popup__input_add-card_link');
-const template = document.querySelector('.template');
 const elementList = document.querySelector('.elements-grid');
-const meaningImg = document.querySelector('.popup__image');
-const meaningName = document.querySelector('.popup__image-title');
 const imageOpenPopup = document.querySelector('.popup_type_image');
 const popups = document.querySelectorAll('.popup');
 const form = document.querySelector('.popup__form_type_second');
 const addButton = document.querySelector('.popup__save-button_add');
+
 
 //объекты настроек всеx нужныx функциям классов и селекторов элементов
 const validationConfig = {
@@ -38,6 +36,11 @@ const validationConfig = {
     errorClass: 'popup__input-error_active',
 };
 
+const cardFormValidator = new FormValidator(validationConfig, addPopupForm);
+cardFormValidator.enableValidation();
+
+const profileFormValidator = new FormValidator(validationConfig, editPopupForm);
+profileFormValidator.enableValidation();
 
 // закрытие попапа с помощью Esc
 function closePopupEsc(evt) {
@@ -65,6 +68,7 @@ function openEditPopup() {
     openPopup(editPopupElement);
     nameInput.value = profileNameElement.textContent;
     interestInput.value = profileInterestElement.textContent;
+    profileFormValidator.resetValidation();
 }
 
 // закрытие профиля
@@ -83,6 +87,7 @@ function handleEditFormSubmit(evt) {
 //открытие редактирования фото
 function openAddPopup() {
     openPopup(addPopupButton);
+    cardFormValidator.resetValidation();
 }
 
 // закрытие редактора фото
@@ -90,55 +95,16 @@ function closeAddPopup() {
     closePopup(addPopupButton);
 }
 
-// очищение значений
+/* // очищение значений
 function clearCardPopup() {
     linkInput.value = '';
     placeInput.value = '';
-}
+} */
 
 //закрытие изображения
 function closeImagePopup() {
     closePopup(imageOpenPopup);
 }
-
-const createDomNode = (item) => {
-    // клонируем содержание тега template
-    const taskTemplate = template.content.querySelector('.element__item').cloneNode(true);
-
-    //наполняем содержимым
-    const nameOpen = taskTemplate.querySelector('.element__caption');
-    const image = taskTemplate.querySelector('.element__image');
-    nameOpen.textContent = item.name;
-    image.src = item.link;
-    image.alt = item.name;
-
-    //реализуем кнопку лайк
-    const likeBtn = taskTemplate.querySelector('.element__like');
-    likeBtn.addEventListener('click', function(evt) {
-        evt.target.classList.toggle('element__like_active');
-    });
-
-    //реализуем кнопку удаления
-    const deleteBtn = taskTemplate.querySelector('.element__delete');
-    deleteBtn.addEventListener('click', () => {
-        taskTemplate.remove();
-    });
-
-    //открытие изображения
-    image.addEventListener('click', () => {
-        openPopup(imageOpenPopup);
-        meaningName.textContent = nameOpen.textContent;
-        meaningImg.src = image.src;
-        meaningImg.alt = image.alt;
-
-    });
-
-    return taskTemplate;
-}
-
-const result = initialCards.map((item) => {
-    return createDomNode(item);
-});
 
 function setSubmitButtonState(isFormValid) {
     if (isFormValid) {
@@ -150,8 +116,97 @@ function setSubmitButtonState(isFormValid) {
     }
 }
 
-// добавление карточки на стр.
+/* 'это было 
+const createDomNode = (item) => { 
+
+    // клонируем содержание тега template 
+
+    const taskTemplate = template.content.querySelector('.element__item').cloneNode(true); 
+
+ 
+
+    //наполняем содержимым 
+
+    const nameOpen = taskTemplate.querySelector('.element__caption'); 
+
+    const image = taskTemplate.querySelector('.element__image'); 
+
+    nameOpen.textContent = item.name; 
+
+    image.src = item.link; 
+
+    image.alt = item.name; 
+
+ 
+
+    //реализуем кнопку лайк 
+
+    const likeBtn = taskTemplate.querySelector('.element__like'); 
+
+    likeBtn.addEventListener('click', function(evt) { 
+
+        evt.target.classList.toggle('element__like_active'); 
+
+    }); 
+
+ 
+
+    //реализуем кнопку удаления 
+
+    const deleteBtn = taskTemplate.querySelector('.element__delete'); 
+
+    deleteBtn.addEventListener('click', () => { 
+
+        taskTemplate.remove(); 
+
+    }); 
+
+ 
+
+    //открытие изображения 
+
+    image.addEventListener('click', () => { 
+
+        openPopup(imageOpenPopup); 
+        meaningName.textContent = nameOpen.textContent; 
+        meaningImg.src = image.src; 
+        meaningImg.alt = image.alt; 
+
+    }); 
+    return taskTemplate; 
+
+} 
+
+const result = initialCards.map((item) => { 
+
+    return createDomNode(item); 
+
+}); */
+
+// функция для создания карточки
+function createCard(item) {
+    const card = new Card(item, '.template');
+    const cardElement = card.generateCard();
+
+    return cardElement;
+    /* document.body.prepend(cardElement); */
+    /* elementList.prepend(new Card(item, '.template').generateCard()); */
+}
+
+
+function saveCard() {
+    createCard(linkInput.value, placeInput.value);
+    closeAddPopup();
+}
+
+// перебераем массив и добавляем карточку
+initialCards.forEach(item => {
+    createCard(item);
+});
+
+// добавление карточки на стр. с помощью попапа
 const handleCardFormSubmit = (evt) => {
+    cardFormValidator.resetValidation();
     evt.preventDefault();
     const inputValueLink = linkInput.value;
     const inputValuePlace = placeInput.value;
@@ -164,6 +219,8 @@ const handleCardFormSubmit = (evt) => {
 }
 
 elementList.append(...result);
+
+
 
 form.addEventListener('input', function(evt) {
     const isValid = linkInput.value.length > 0 && placeInput.value.length > 0
@@ -179,7 +236,7 @@ popups.forEach((popup) => {
     })
 })
 
-addPopupForm.addEventListener('submit', handleCardFormSubmit);
+addPopupForm.addEventListener('submit', saveCard);
 openEditPopupButton.addEventListener('click', openEditPopup);
 closePopupButton.addEventListener('click', closeEditPopup);
 editPopupForm.addEventListener('submit', handleEditFormSubmit);
