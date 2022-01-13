@@ -1,13 +1,13 @@
 //класс, который настраивает валидацию полей формы
 
 export class FormValidator {
-    constructor(config, formElement) {
-        this._formSelector = config.formSelector;
-        this._inputSelector = config.inputSelector;
-        this._submitBtnSelector = config.submitButtonSelector;
-        this._inactiveButtonClass = config.inactiveButtonClass;
-        this._inputErrorClass = config.inputErrorClass;
-        this._errorClass = config.errorClass;
+    constructor(validationConfig, formElement) {
+        this._formSelector = validationConfig.formSelector;
+        this._inputSelector = validationConfig.inputSelector;
+        this._submitBtnSelector = validationConfig.submitButtonSelector;
+        this._inactiveButtonClass = validationConfig.inactiveButtonClass;
+        this._inputErrorClass = validationConfig.inputErrorClass;
+        this._errorClass = validationConfig.errorClass;
         this._formElement = formElement;
     }
 
@@ -52,42 +52,43 @@ export class FormValidator {
     }
 
     //метод, который принимает массив полей ввода и эл-т кнопки,состояние которой нужно поменять
-    _toggleButtonState(inputList, buttonElement) {
-        if (this._hasInvalidInput(inputList)) {
+    _toggleButtonState(buttonElement) {
+        /*if (this._hasInvalidInput(inputList)) {
             buttonElement.setAttribute('disabled', true);
             buttonElement.classList.add(this._inactiveButtonClass);
         } else {
             buttonElement.removeAttribute('disabled');
             buttonElement.classList.remove(this._inactiveButtonClass);
-        }
-        /*const isFormValid = this._formElement.checkValidity();
+        }*/
+        const isFormValid = this._formElement.checkValidity();
         buttonElement.classList.toggle(this._inactiveButtonClass, !isFormValid);
-        buttonElement.disabled = !isFormValid;*/
+        buttonElement.disabled = !isFormValid;
     };
 
     //метод добавления слушателей для каждого поля ввода
     _setEventListeners() {
         const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
         const buttonElement = this._formElement.querySelector(this._submitBtnSelector);
-        this._toggleButtonState(inputList, buttonElement);
+        /*this._toggleButtonState(inputList, buttonElement);*/
 
         inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
                 this._isValid(inputElement);
-
-                this._toggleButtonState(inputList, buttonElement);
-
+                this._toggleButtonState(buttonElement);
             });
         });
     }
 
     enableValidation() {
-        this._formElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        });
+        const forms = Array.from(document.querySelectorAll(this._formSelector));
+        forms.forEach((form) => {
+            this._formElement.addEventListener('submit', (evt) => {
+                evt.preventDefault();
+            });
 
-        this._setEventListeners();
-    };
+            this._setEventListeners(form);
+        })
+    }
 
     resetValidation() {
 
