@@ -45,24 +45,24 @@ export class FormValidator {
     }
 
     //метод проверки на невалидные поля
-    _hasInvalidInput(inputList) {
-        return inputList.some(inputElement => {
+    _hasInvalidInput() {
+        return this._inputList.some((inputElement) => {
             return !inputElement.validity.valid;
         });
     }
 
     //метод, который принимает массив полей ввода и эл-т кнопки,состояние которой нужно поменять
     _toggleButtonState(buttonElement) {
-        /*if (this._hasInvalidInput(inputList)) {
+        if (this._hasInvalidInput(inputList)) {
             buttonElement.setAttribute('disabled', true);
             buttonElement.classList.add(this._inactiveButtonClass);
         } else {
             buttonElement.removeAttribute('disabled');
             buttonElement.classList.remove(this._inactiveButtonClass);
-        }*/
-        const isFormValid = this._formElement.checkValidity();
+        }
+        /* const isFormValid = this._formElement.checkValidity();
         buttonElement.classList.toggle(this._inactiveButtonClass, !isFormValid);
-        buttonElement.disabled = !isFormValid;
+        buttonElement.disabled = !isFormValid; */
     };
 
     //метод добавления слушателей для каждого поля ввода
@@ -92,7 +92,7 @@ export class FormValidator {
 
     resetValidation() {
 
-        this._toggleButtonState(inputList, buttonElement); //управляем кнопкой
+        this._toggleButtonState(buttonElement); //управляем кнопкой
 
         this._inputList.forEach((inputElement) => {
             this._hideInputError(inputElement); //очищаем ошибки 

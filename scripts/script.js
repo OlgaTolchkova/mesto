@@ -116,83 +116,13 @@ function setSubmitButtonState(isFormValid) {
     }
 }
 
-/* 'это было 
-const createDomNode = (item) => { 
-
-    // клонируем содержание тега template 
-
-    const taskTemplate = template.content.querySelector('.element__item').cloneNode(true); 
-
- 
-
-    //наполняем содержимым 
-
-    const nameOpen = taskTemplate.querySelector('.element__caption'); 
-
-    const image = taskTemplate.querySelector('.element__image'); 
-
-    nameOpen.textContent = item.name; 
-
-    image.src = item.link; 
-
-    image.alt = item.name; 
-
- 
-
-    //реализуем кнопку лайк 
-
-    const likeBtn = taskTemplate.querySelector('.element__like'); 
-
-    likeBtn.addEventListener('click', function(evt) { 
-
-        evt.target.classList.toggle('element__like_active'); 
-
-    }); 
-
- 
-
-    //реализуем кнопку удаления 
-
-    const deleteBtn = taskTemplate.querySelector('.element__delete'); 
-
-    deleteBtn.addEventListener('click', () => { 
-
-        taskTemplate.remove(); 
-
-    }); 
-
- 
-
-    //открытие изображения 
-
-    image.addEventListener('click', () => { 
-
-        openPopup(imageOpenPopup); 
-        meaningName.textContent = nameOpen.textContent; 
-        meaningImg.src = image.src; 
-        meaningImg.alt = image.alt; 
-
-    }); 
-    return taskTemplate; 
-
-} 
-
-const result = initialCards.map((item) => { 
-
-    return createDomNode(item); 
-
-}); */
-
 // функция для создания карточки
-function createCard(item) {
-    const card = new Card(item, '.template');
+function createCard(dataCard) {
+    const card = new Card(dataCard, '.template');
     const cardElement = card.generateCard();
 
     return cardElement;
-    /* document.body.prepend(cardElement); */
-    /* elementList.prepend(new Card(item, '.template').generateCard()); */
 }
-
 
 function saveCard() {
     createCard(linkInput.value, placeInput.value);
@@ -200,8 +130,8 @@ function saveCard() {
 }
 
 // перебераем массив и добавляем карточку
-initialCards.forEach(item => {
-    createCard(item);
+initialCards.forEach(dataCard => {
+    createCard(dataCard);
 });
 
 // добавление карточки на стр. с помощью попапа
@@ -210,7 +140,7 @@ const handleCardFormSubmit = (evt) => {
     evt.preventDefault();
     const inputValueLink = linkInput.value;
     const inputValuePlace = placeInput.value;
-    const taskName = createDomNode({ name: inputValuePlace, link: inputValueLink });
+    const taskName = createCard({ name: inputValuePlace, link: inputValueLink });
 
     elementList.prepend(taskName);
     closeAddPopup();
@@ -218,7 +148,7 @@ const handleCardFormSubmit = (evt) => {
     setSubmitButtonState(false);
 }
 
-elementList.append(...result);
+/*elementList.append(cardElement);*/
 
 
 
@@ -236,7 +166,8 @@ popups.forEach((popup) => {
     })
 })
 
-addPopupForm.addEventListener('submit', saveCard);
+addPopupForm.addEventListener('submit', handleCardFormSubmit);
+
 openEditPopupButton.addEventListener('click', openEditPopup);
 closePopupButton.addEventListener('click', closeEditPopup);
 editPopupForm.addEventListener('submit', handleEditFormSubmit);
